@@ -1,0 +1,12 @@
+{
+  "dashboard": {
+    "title": "O Levante Metrics",
+    "panels": [
+      {
+        "title": "Active Users",
+        "type": "graph",
+        "datasource": "Prometheus"
+      }
+    ]
+  }
+}

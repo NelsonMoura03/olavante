@@ -1,0 +1,14 @@
+{
+  "badges": [
+    {
+      "id": 1,
+      "name": "Fiscal Iniciante",
+      "threshold": 50
+    },
+    {
+      "id": 2,
+      "name": "Agente da Transparência",
+      "threshold": 200
+    }
+  ]
+}

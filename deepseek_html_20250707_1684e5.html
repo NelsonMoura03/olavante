@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Levante - Memorando de Investimento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #161A1D;
+        }
+        h1, h2, h3, h4, h5, h6, .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+        .bg-brand-red { background-color: #D90429; }
+        .text-brand-red { color: #D90429; }
+        .border-brand-red { border-color: #D90429; }
+        .bg-brand-dark { background-color: #161A1D; }
+        .text-brand-light { color: #f8f9fa; }
+
+        /* Interactive elements */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #D90429;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .risk-row:hover .risk-mitigation {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .timeline-item-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+        }
+        
+        .tech-stack-item {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .tech-stack-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header Navigation -->
+    <header class="bg-white sticky top-0 z-50 shadow-md">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg class="h-8 w-8 text-brand-red" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M4 20V8H8V20H4ZM10 20V4H14V20H10ZM16 20V12H20V20H16Z"/>
+                </svg>
+                <h1 class="text-2xl font-bold text-brand-dark font-poppins">O Levante</h1>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#visao-geral" class="nav-link font-semibold text-gray-600 hover:text-brand-red">Visão Geral</a>
+                <a href="#plataforma" class="nav-link font-semibold text-gray-600 hover:text-brand-red">A Plataforma</a>
+                <a href="#plano" class="nav-link font-semibold text-gray-600 hover:text-brand-red">O Plano</a>
+                <a href="#investimento" class="nav-link font-semibold text-gray-600 hover:text-brand-red">O Investimento</a>
+                <a href="#contato" class="bg-brand-red text-white font-bold py-2 px-6 rounded-lg hover:bg-red-700 transition-colors">Contato</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-brand-dark text-brand-light py-24 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold leading-tight">Onde Big Data encontra a Cidadania</h1>
+                <p class="text-xl md:text-2xl mt-4 text-gray-300 max-w-4xl mx-auto">
+                    A primeira plataforma que combina a viralidade das redes sociais com a robustez 
+                    de um sistema de Business Intelligence governamental
+                </p>
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-white/10 p-6 rounded-xl">
+                        <p class="text-4xl font-bold text-brand-red">1M+</p>
+                        <p class="text-gray-400">Meta de Usuários (24 meses)</p>
+                    </div>
+                    <div class="bg-white/10 p-6 rounded-xl">
+                        <p class="text-4xl font-bold text-brand-red">3 Modelos</p>
+                        <p class="text-gray-400">B2C + B2B + B2G</p>
+                    </div>
+                    <div class="bg-white/10 p-6 rounded-xl">
+                        <p class="text-4xl font-bold text-brand-red">5 Países</p>
+                        <p class="text-gray-400">Expansão LATAM</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visão Geral Section -->
+        <section id="visao-geral" class="py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold">Visão Geral</h2>
+                    <p class="text-lg text-gray-600 mt-4">Revolucionando o controle social através da tecnologia</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <h3 class="text-3xl font-bold mb-4">O Problema Atual</h3>
+                        <ul class="space-y-4 text-gray-700 text-lg">
+                            <li class="flex items-start">
+                                <span class="text-brand-red mr-2">•</span>
+                                <span>93% dos brasileiros não confiam nos políticos (Fonte: IPEA)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-brand-red mr-2">•</span>
+                                <span>Portais de transparência são complexos e pouco acessíveis</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-brand-red mr-2">•</span>
+                                <span>Falta de ferramentas para ação cívica efetiva</span>
+                            </li>
+                        </ul>
+
+                        <h3 class="text-3xl font-bold mt-10 mb-4">Nossa Solução</h3>
+                        <p class="text-gray-700 text-lg">
+                            O Levante transforma dados brutos em insights acionáveis, distribuídos através de uma 
+                            rede social gamificada que incentiva a fiscalização e mobilização cívica.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-xl shadow-xl border">
+                        <h4 class="font-bold text-xl mb-6 text-center text-brand-red">Proposta de Valor Única</h4>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-brand-red/10 p-3 rounded-full mr-4">
+                                    <span class="text-brand-red text-xl">👥</span>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-gray-800">Para Cidadãos</h5>
+                                    <p class="text-gray-600">Ferramentas simples para fiscalizar gastos públicos e cobrar melhorias</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-brand-red/10 p-3 rounded-full mr-4">
+                                    <span class="text-brand-red text-xl">🔍</span>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-gray-800">Para Jornalistas</h5>
+                                    <p class="text-gray-600">Acesso a dados tratados e insights para investigações</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-brand-red/10 p-3 rounded-full mr-4">
+                                    <span class="text-brand-red text-xl">🏛️</span>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-gray-800">Para Governos</h5>
+                                    <p class="text-gray-600">Dashboards para monitorar transparência e eficiência</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Platform Section -->
+        <section id="plataforma" class="py-20 md:py-28 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold">A Plataforma</h2>
+                    <p class="text-lg text-gray-600 mt-4">Tecnologia robusta para impacto social real</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-lg">
+                    <!-- Platform Tabs -->
+                    <div class="flex overflow-x-auto mb-8 rounded-lg bg-gray-200 p-1">
+                        <button data-tab="arquitetura" class="platform-tab flex-1 py-3 px-4 font-bold rounded-md transition-colors bg-brand-red text-white">
+                            Arquitetura
+                        </button>
+                        <button data-tab="funcionalidades" class="platform-tab flex-1 py-3 px-4 font-bold rounded-md transition-colors">
+                            Funcionalidades
+                        </button>
+                        <button data-tab="ai-demo" class="platform-tab flex-1 py-3 px-4 font-bold rounded-md transition-colors">
+                            Demo com IA
+                        </button>
+                    </div>
+
+                    <!-- Architecture Tab -->
+                    <div id="arquitetura" class="platform-content">
+                        <h3 class="text-2xl font-bold text-center mb-8">Arquitetura Técnica</h3>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div class="tech-stack-item p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                <div class="text-center">
+                                    <div class="bg-brand-red/10 p-3 rounded-full inline-block mb-2">
+                                        <span class="text-brand-red text-xl">📱</span>
+                                    </div>
+                                    <h4 class="font-bold">Frontend</h4>
+                                    <p class="text-sm text-gray-600">Flutter & React</p>
+                                </div>
+                            </div>
+                            
+                            <div class="tech-stack-item p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                <div class="text-center">
+                                    <div class="bg-brand-red/10 p-3 rounded-full inline-block mb-2">
+                                        <span class="text-brand-red text-xl">⚙️</span>
+                                    </div>
+                                    <h4 class="font-bold">Backend</h4>
+                                    <p class="text-sm text-gray-600">Python & Node.js</p>
+                                </div>
+                            </div>
+                            
+                            <div class="tech-stack-item p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                <div class="text-center">
+                                    <div class="bg-brand-red/10 p-3 rounded-full inline-block mb-2">
+                                        <span class="text-brand-red text-xl">🗃️</span>
+                                    </div>
+                                    <h4 class="font-bold">Banco de Dados</h4>
+                                    <p class="text-sm text-gray-600">PostgreSQL</p>
+                                </div>
+                            </div>
+                            
+                            <div class="tech-stack-item p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                <div class="text-center">
+                                    <div class="bg-brand-red/10 p-3 rounded-full inline-block mb-2">
+                                        <span class="text-brand-red text-xl">🧠</span>
+                                    </div>
+                                    <h4 class="font-bold">Inteligência</h4>
+                                    <p class="text-sm text-gray-600">PaddlePaddle</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 text-center">
+                            <p class="text-gray-600">
+                                Infraestrutura escalável em <strong class="text-brand-dark">Huawei Cloud</strong> com 
+                                <strong class="text-brand-dark">Kubernetes</strong> para alta disponibilidade
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Features Tab -->
+                    <div id="funcionalidades" class="platform-content hidden">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <div class="flex items-center mb-4">
+                                    <div class="bg-brand-red/10 p-2 rounded-full mr-3">
+                                        <span class="text-brand-red text-xl">📊</span>
+                                    </div>
+                                    <h3 class="text-2xl font-bold">Painel de Dados</h3>
+                                </div>
+                                <ul class="space-y-3 pl-2">
+                                    <li class="flex items-start">
+                                        <span class="text-brand-red mr-2">•</span>
+                                        <span>Cruzamento inteligente de indicadores</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-brand-red mr-2">•</span>
+                                        <span>Alertas de contratos suspeitos</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-brand-red mr-2">•</span>
+                                        <span>Exportação para redes sociais</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <div class="flex items-center mb-4">
+                                    <div class="bg-brand-red/10 p-2 rounded-full mr-3">
+                                        <span class="text-brand-red text-xl">🤳</span>
+                                    </div>
+                                    <h3 class="text-2xl font-bold">Rede Social</h3>
+                                </div>
+                                <ul class="space-y-3 pl-2">
+                                    <li class="flex items-start">
+                                        <span class="text-brand-red mr-2">•</span>
+                                        <span>Feed de "Cards da Verdade"</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-brand-red mr-2">•</span>
+                                        <span>Grupos por causa/cidade</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-brand-red mr-2">•</span>
+                                        <span>Sistema de gamificação</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Demo Tab -->
+                    <div id="ai-demo" class="platform-content hidden">
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-bold mb-4">Demonstração de IA para Fiscalização</h3>
+                            
+                            <div class="mb-4">
+                                <label for="problema-input" class="block text-sm font-medium text-gray-700 mb-1">
+                                    Descreva um problema em sua cidade:
+                                </label>
+                                <textarea id="problema-input" rows="3" class="w-full p-3 bg-white rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-red" placeholder="Ex: A prefeitura prometeu reformar a praça central mas nada foi feito..."></textarea>
+                            </div>
+                            
+                            <button id="analise-btn" class="w-full bg-brand-red text-white font-bold py-3 px-6 rounded-lg hover:bg-red-700 transition-colors flex items-center justify-center">
+                                <span id="btn-text">Analisar com IA</span>
+                                <span id="loading-spinner" class="ml-2 hidden">⌛</span>
+                            </button>
+                            
+                            <div class="mt-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">
+                                    Análise e Ações Recomendadas:
+                                </label>
+                                <div id="analise-output" class="p-4 bg-white rounded-md border min-h-[120px] text-sm text-gray-700">
+                                    Descreva um problema acima para receber orientações específicas sobre quais dados públicos consultar e como agir.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap Section -->
+        <section id="plano" class="py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold">Plano de Implementação</h2>
+                    <p class="text-lg text-gray-600 mt-4">Crescimento faseado com métricas claras</p>
+                </div>
+                
+                <div class="space-y-4 max-w-4xl mx-auto">
+                    <!-- Phase 1 -->
+                    <div class="border rounded-xl overflow-hidden">
+                        <button class="timeline-toggle w-full text-left p-6 bg-white hover:bg-gray-50 flex justify-between items-center">
+                            <div>
+                                <span class="inline-block bg-brand-red text-white text-sm font-bold px-3 py-1 rounded-full mb-2">Fase 1</span>
+                                <h3 class="text-2xl font-bold">MVP Bahia (6 Meses)</h3>
+                            </div>
+                            <span class="text-2xl text-brand-red transform transition-transform">▼</span>
+                        </button>
+                        <div class="timeline-item-content bg-white px-6">
+                            <div class="py-6 border-t">
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <h4 class="font-bold text-brand-red mb-2">Objetivos</h4>
+                                        <ul class="space-y-2">
+                                            <li class="flex items-start">
+                                                <span class="text-brand-red mr-2">•</span>
+                                                <span>Validar modelo com 50k usuários</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <span class="text-brand-red mr-2">•</span>
+                                                <span>Integrar 5 fontes de dados prioritárias</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-brand-red mb-2">Investimento</h4>
+                                        <p class="text-2xl font-bold">R$ 380.000</p>
+                                        <p class="text-sm text-gray-600">(Seed Round)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 2 -->
+                    <div class="border rounded-xl overflow-hidden">
+                        <button class="timeline-toggle w-full text-left p-6 bg-white hover:bg-gray-50 flex justify-between items-center">
+                            <div>
+                                <span class="inline-block bg-brand-red text-white text-sm font-bold px-3 py-1 rounded-full mb-2">Fase 2</span>
+                                <h3 class="text-2xl font-bold">Escala Nacional (12 Meses)</h3>
+                            </div>
+                            <span class="text-2xl text-brand-red transform transition-transform">▼</span>
+                        </button>
+                        <div class="timeline-item-content bg-white px-6">
+                            <div class="py-6 border-t">
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <h4 class="font-bold text-brand-red mb-2">Objetivos</h4>
+                                        <ul class="space-y-2">
+                                            <li class="flex items-start">
+                                                <span class="text-brand-red mr-2">•</span>
+                                                <span>500k usuários ativos</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <span class="text-brand-red mr-2">•</span>
+                                                <span>Integração com 10+ órgãos federais</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-brand-red mb-2">Investimento</h4>
+                                        <p class="text-2xl font-bold">R$ 2.500.000</p>
+                                        <p class="text-sm text-gray-600">(Series A)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 3 -->
+                    <div class="border rounded-xl overflow-hidden">
+                        <button class="timeline-toggle w-full text-left p-6 bg-white hover:bg-gray-50 flex justify-between items-center">
+                            <div>
+                                <span class="inline-block bg-brand-red text-white text-sm font-bold px-3 py-1 rounded-full mb-2">Fase 3</span>
+                                <h3 class="text-2xl font-bold">Expansão LATAM (24+ Meses)</h3>
+                            </div>
+                            <span class="text-2xl text-brand-red transform transition-transform">▼</span>
+                        </button>
+                        <div class="timeline-item-content bg-white px-6">
+                            <div class="py-6 border-t">
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <h4 class="font-bold text-brand-red mb-2">Objetivos</h4>
+                                        <ul class="space-y-2">
+                                            <li class="flex items-start">
+                                                <span class="text-brand-red mr-2">•</span>
+                                                <span>1M+ usuários ativos</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <span class="text-brand-red mr-2">•</span>
+                                                <span>Presença em 3 países (MX, CO, AR)</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-brand-red mb-2">Investimento</h4>
+                                        <p class="text-2xl font-bold">R$ 5.000.000</p>
+                                        <p class="text-sm text-gray-600">(Series B)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investment Section -->
+        <section id="investimento" class="py-20 md:py-28 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold">Oportunidade de Investimento</h2>
+                    <p class="text-lg text-gray-600 mt-4">Junte-se a nós na construção da principal plataforma de transparência da América Latina</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <h3 class="text-3xl font-bold mb-6">Rodada Semente (Seed)</h3>
+                        
+                        <div class="mb-8">
+                            <p class="text-5xl font-bold text-brand-red mb-2">R$ 500.000</p>
+                            <p class="text-gray-600">Valoração pré-money: R$ 2.5M</p>
+                        </div>
+                        
+                        <h4 class="font-bold text-xl mb-4">Fontes de Receita</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="bg-brand-red/10 p-2 rounded-full mr-3">
+                                    <span class="text-brand-red">💰</span>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-gray-800">Assinaturas Premium</h5>
+                                    <p class="text-gray-600">Para jornalistas, pesquisadores e ONGs (R$ 29,90/mês)</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-brand-red/10 p-2 rounded-full mr-3">
+                                    <span class="text-brand-red">🏛️</span>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-gray-800">Venda B2G</h5>
+                                    <p class="text-gray-600">Dashboards customizados para prefeituras</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-brand-red/10 p-2 rounded-full mr-3">
+                                    <span class="text-brand-red">🤝</span>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-gray-800">Parcerias</h5>
+                                    <p class="text-gray-600">Com organizações de transparência e fundações</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-center mb-4">Alocação dos Recursos</h3>
+                        <div class="chart-container h-80 max-h-80">
+                            <canvas id="investmentChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Team & Risks Section -->
+        <section id="equipe-riscos" class="py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-16">
+                    <div>
+                        <h2 class="text-4xl font-bold mb-8">Equipe e Governança</h2>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-xl font-bold text-brand-red mb-2">Equipe Fundadora</h3>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <span class="text-brand-red mr-2">•</span>
+                                        <span><strong>CEO/Product Owner</strong>: Experiência em govtech e negócios sociais</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-brand-red mr-2">•</span>
+                                        <span><strong>CTO</strong>: Especialista em big data e sistemas distribuídos</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-brand-red mr-2">•</span>
+                                        <span><strong>Engenheiro de Dados</strong>: Conhecimento em APIs governamentais</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-xl font-bold text-brand-red mb-2">Conselho Consultivo</h3>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <span class="text-brand-red mr-2">•</span>
+                                        <span>Representante do Ministério Público</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-brand-red mr-2">•</span>
+                                        <span>Especialista em Políticas Públicas</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-brand-red mr-2">•</span>
+                                        <span>Investidor de Impacto</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h2 class="text-4xl font-bold mb-8">Análise de Riscos</h2>
+                        
+                        <div class="space-y-4">
+                            <div class="risk-row p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                                <div class="flex justify-between items-center">
+                                    <p class="font-bold">Resistência Política</p>
+                                    <span class="text-brand-red">▲ Médio</span>
+                                </div>
+                                <div class="risk-mitigation mt-2 text-sm text-gray-600 opacity-0 h-0 transition-all">
+                                    <strong>Mitigação:</strong> Parcerias com órgãos de controle independentes e foco em dados oficiais.
+                                </div>
+                            </div>
+                            
+                            <div class="risk-row p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                                <div class="flex justify-between items-center">
+                                    <p class="font-bold">Segurança de Dados</p>
+                                    <span class="text-brand-red">▲ Alto</span>
+                                </div>
+                                <div class="risk-mitigation mt-2 text-sm text-gray-600 opacity-0 h-0 transition-all">
+                                    <strong>Mitigação:</strong> Infraestrutura em nuvem segura, criptografia avançada e compliance com LGPD.
+                                </div>
+                            </div>
+                            
+                            <div class="risk-row p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                                <div class="flex justify-between items-center">
+                                    <p class="font-bold">Adoção de Usuários</p>
+                                    <span class="text-brand-red">▲ Médio</span>
+                                </div>
+                                <div class="risk-mitigation mt-2 text-sm text-gray-600 opacity-0 h-0 transition-all">
+                                    <strong>Mitigação:</strong> Gamificação, parcerias com influenciadores cívicos e campanhas segmentadas.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="contato" class="py-20 md:py-28 bg-brand-dark text-brand-light">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Pronto para fazer parte desta revolução?</h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-10">
+                    Estamos buscando investidores e parceiros estratégicos para a fase de lançamento.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="mailto:investimentos@olevante.com.br" class="bg-brand-red text-white font-bold text-lg py-4 px-8 rounded-lg hover:bg-red-700 transition-colors">
+                        Fale com nosso time
+                    </a>
+                    <a href="#plataforma" class="bg-white text-brand-dark font-bold text-lg py-4 px-8 rounded-lg hover:bg-gray-100 transition-colors">
+                        Ver demonstração
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white py-8 border-t">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <svg class="h-8 w-8 text-brand-red" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M4 20V8H8V20H4ZM10 20V4H14V20H10ZM16 20V12H20V20H16Z"/>
+                    </svg>
+                    <span class="text-xl font-bold text-brand-dark">O Levante</span>
+                </div>
+                
+                <div class="text-gray-500 text-sm">
+                    &copy; 2025 O Levante. Todos os direitos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Platform Tabs
+        const platformTabs = document.querySelectorAll('.platform-tab');
+        const platformContents = document.querySelectorAll('.platform-content');
+        
+        platformTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update tab styles
+                platformTabs.forEach(t => {
+                    t.classList.remove('bg-brand-red', 'text-white');
+                    t.classList.add('bg-gray-200', 'text-gray-800');
+                });
+                tab.classList.add('bg-brand-red', 'text-white');
+                tab.classList.remove('bg-gray-200', 'text-gray-800');
+                
+                // Show corresponding content
+                const target = tab.dataset.tab;
+                platformContents.forEach(content => {
+                    content.classList.toggle('hidden', content.id !== target);
+                });
+            });
+        });
+
+        // Timeline Toggles
+        const timelineToggles = document.querySelectorAll('.timeline-toggle');
+        timelineToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const content = toggle.nextElementSibling;
+                const icon = toggle.querySelector('span');
+                
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    content.style.paddingTop = '0';
+                    content.style.paddingBottom = '0';
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    content.style.paddingTop = '1.5rem';
+                    content.style.paddingBottom = '1.5rem';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // Risk Mitigation Hover
+        const riskRows = document.querySelectorAll('.risk-row');
+        riskRows.forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                const mitigation = row.querySelector('.risk-mitigation');
+                mitigation.style.opacity = '1';
+                mitigation.style.height = 'auto';
+            });
+            
+            row.addEventListener('mouseleave', () => {
+                const mitigation = row.querySelector('.risk-mitigation');
+                mitigation.style.opacity = '0';
+                mitigation.style.height = '0';
+            });
+        });
+
+        // Investment Chart
+        const ctx = document.getElementById('investmentChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Desenvolvimento (45%)', 'Equipe (25%)', 'Marketing (15%)', 'Infraestrutura (10%)', 'Jurídico (5%)'],
+                datasets: [{
+                    data: [45, 25, 15, 10, 5],
+                    backgroundColor: [
+                        '#D90429',
+                        '#161A1D',
+                        '#6B7280',
+                        '#9CA3AF',
+                        '#D1D5DB'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.label}: ${context.raw}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // AI Demo (simulated)
+        const analiseBtn = document.getElementById('analise-btn');
+        const analiseOutput = document.getElementById('analise-output');
+        const btnText = document.getElementById('btn-text');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        
+        analiseBtn.addEventListener('click', () => {
+            const problemaTexto = document.getElementById('problema-input').value.trim();
+            
+            if (!problemaTexto) {
+                analiseOutput.textContent = 'Por favor, descreva um problema para análise.';
+                return;
+            }
+            
+            // Show loading state
+            analiseBtn.disabled = true;
+            btnText.textContent = 'Analisando';
+            loadingSpinner.classList.remove('hidden');
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Sample responses based on input
+                const responses = [
+                    `1. Dados a consultar:\n- Portal da Transparência do seu município (contratos de obras públicas)\n- Sistema de Licitações (processo Licitatório)\n\n2. Perguntas para LAI:\n- "Qual o valor contratado e prazo para esta obra?"\n- "Quantas fiscalizações foram realizadas?"\n\n3. Palavras-chave para monitorar:\n- "Reforma de praça"\n- "Contrato de manutenção"`,
+                    
+                    `1. Dados a consultar:\n- Relatórios do DataSUS (saúde)\n- Repasses do Fundo Municipal de Saúde\n\n2. Perguntas para LAI:\n- "Quantos médicos estão alocados neste posto?"\n- "Qual o valor investido em medicamentos?"\n\n3. Palavras-chave:\n- "Saúde básica"\n- "Contratação médica"`,
+                    
+                    `1. Dados a consultar:\n- Portal da Transparência (Educação)\n- Relatórios do INEP (IDEB)\n\n2. Perguntas para LAI:\n- "Qual o investimento por aluno nesta escola?"\n- "Há verba para reforma aprovada?"\n\n3. Palavras-chave:\n- "Merenda escolar"\n- "Reforma de escola"`
+                ];
+                
+                // Select random response
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                analiseOutput.textContent = randomResponse;
+                
+                // Reset button
+                analiseBtn.disabled = false;
+                btnText.textContent = 'Analisar com IA';
+                loadingSpinner.classList.add('hidden');
+            }, 2000);
+        });
+    });
+    </script>
+</body>
+</html>

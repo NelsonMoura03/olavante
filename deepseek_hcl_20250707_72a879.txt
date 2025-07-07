@@ -1,0 +1,9 @@
+resource "aws_ecs_cluster" "olevante" {
+  name = "olevante-cluster"
+}
+
+resource "aws_lb" "app" {
+  name               = "olevante-lb"
+  internal           = false
+  load_balancer_type = "application"
+}

@@ -1,0 +1,12 @@
+/src
+  /components
+    Header.js
+    DataCard.js
+    Feed.js
+  /pages
+    Home.js
+    Dashboard.js
+    Profile.js
+  /services
+    api.js
+    auth.js
